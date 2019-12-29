@@ -1,0 +1,2 @@
+Application Version: ${livehub.version}
+Spring Boot Version: ${spring-boot.version}

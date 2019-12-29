@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.livehub.cloud.mapper.LhcWeightMapper">
+
+    <update id="createWeightTable">
+        create table if not exists
+            weight (ts timestamp, oid binary(24), weight int)
+            tags(did bigint);
+    </update>
+
+    <sql id="selectLhcWeightVo">
+        select ts, oid, weight, did from weight
+    </sql>
+
+    <select id="selectLhcWeightList" parameterType="LhcWeight" resultType="java.util.LinkedHashMap">
+        <include refid="selectLhcWeightVo"/>
+    </select>
+    
+
+        
+    <insert id="insertLhcWeight" parameterType="LhcWeight">
+        insert into weight${did} using weight tags (#{did,jdbcType=BIGINT})
+                values (#{ts,jdbcType=TIMESTAMP}, #{oid,jdbcType=VARCHAR}, #{weight,jdbcType=INTEGER});
+    </insert>
+
+
+    
+</mapper>
