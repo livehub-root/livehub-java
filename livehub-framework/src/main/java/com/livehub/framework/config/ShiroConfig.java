@@ -226,6 +226,7 @@ public class ShiroConfig
     /**
      * Shiro过滤器配置
      */
+    @SuppressWarnings("AlibabaRemoveCommentedCode")
     @Bean
     public ShiroFilterFactoryBean shiroFilterFactoryBean(SecurityManager securityManager)
     {

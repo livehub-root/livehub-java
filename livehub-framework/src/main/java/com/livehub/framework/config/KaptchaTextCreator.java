@@ -30,7 +30,7 @@ public class KaptchaTextCreator extends DefaultTextCreator
         }
         else if (randomoperands == 1)
         {
-            if (!(x == 0) && y % x == 0)
+            if (x != 0 && y % x == 0)
             {
                 result = y / x;
                 suChinese.append(CNUMBERS[y]);

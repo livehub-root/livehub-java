@@ -14,17 +14,18 @@ import com.fasterxml.jackson.databind.ObjectWriter;
  * JSON解析处理
 
  */
+@SuppressWarnings("AlibabaClassNamingShouldBeCamel")
 public class JSON
 {
     public static final String DEFAULT_FAIL = "\"Parse failed\"";
-    private static final ObjectMapper objectMapper = new ObjectMapper();
-    private static final ObjectWriter objectWriter = objectMapper.writerWithDefaultPrettyPrinter();
+    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
+    private static final ObjectWriter OBJECT_WRITER = OBJECT_MAPPER.writerWithDefaultPrettyPrinter();
 
     public static void marshal(File file, Object value) throws Exception
     {
         try
         {
-            objectWriter.writeValue(file, value);
+            OBJECT_WRITER.writeValue(file, value);
         }
         catch (JsonGenerationException e)
         {
@@ -44,7 +45,7 @@ public class JSON
     {
         try
         {
-            objectWriter.writeValue(os, value);
+            OBJECT_WRITER.writeValue(os, value);
         }
         catch (JsonGenerationException e)
         {
@@ -64,7 +65,7 @@ public class JSON
     {
         try
         {
-            return objectWriter.writeValueAsString(value);
+            return OBJECT_WRITER.writeValueAsString(value);
         }
         catch (JsonGenerationException e)
         {
@@ -84,7 +85,7 @@ public class JSON
     {
         try
         {
-            return objectWriter.writeValueAsBytes(value);
+            return OBJECT_WRITER.writeValueAsBytes(value);
         }
         catch (JsonGenerationException e)
         {
@@ -104,7 +105,7 @@ public class JSON
     {
         try
         {
-            return objectMapper.readValue(file, valueType);
+            return OBJECT_MAPPER.readValue(file, valueType);
         }
         catch (JsonParseException e)
         {
@@ -124,7 +125,7 @@ public class JSON
     {
         try
         {
-            return objectMapper.readValue(is, valueType);
+            return OBJECT_MAPPER.readValue(is, valueType);
         }
         catch (JsonParseException e)
         {
@@ -144,7 +145,7 @@ public class JSON
     {
         try
         {
-            return objectMapper.readValue(str, valueType);
+            return OBJECT_MAPPER.readValue(str, valueType);
         }
         catch (JsonParseException e)
         {
@@ -168,7 +169,7 @@ public class JSON
             {
                 bytes = new byte[0];
             }
-            return objectMapper.readValue(bytes, 0, bytes.length, valueType);
+            return OBJECT_MAPPER.readValue(bytes, 0, bytes.length, valueType);
         }
         catch (JsonParseException e)
         {

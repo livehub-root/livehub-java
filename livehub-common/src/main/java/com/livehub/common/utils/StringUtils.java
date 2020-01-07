@@ -290,11 +290,12 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils
                 nexteCharIsUpperCase = Character.isUpperCase(str.charAt(i + 1));
             }
 
+            boolean isTrue=(i != 0 && !preCharIsUpperCase) && curreCharIsUpperCase;
             if (preCharIsUpperCase && curreCharIsUpperCase && !nexteCharIsUpperCase)
             {
                 sb.append(SEPARATOR);
             }
-            else if ((i != 0 && !preCharIsUpperCase) && curreCharIsUpperCase)
+            else if (isTrue)
             {
                 sb.append(SEPARATOR);
             }

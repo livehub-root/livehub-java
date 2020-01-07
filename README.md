@@ -32,7 +32,10 @@ java -Dlogback.configurationFile=/home/java/logback.xml  -jar livehub-admin.jar
 # 后台运行并挂起 因为有日志，所以输出到黑洞
 nohup java -Dlogback.configurationFile=/home/java/logback.xml  -jar livehub-admin.jar >/dev/null &
 ```
+## 更新
 
+2020-01-07
+- Alibaba Java Code Guidelines 代码规范化
 
 
 

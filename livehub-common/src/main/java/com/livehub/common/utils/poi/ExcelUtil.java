@@ -62,7 +62,7 @@ public class ExcelUtil<T>
     /**
      * Excel sheet最大行数，默认65536
      */
-    public static final int sheetSize = 65536;
+    public static final int SHEET_SIZE = 65536;
 
     /**
      * 工作表名称
@@ -191,7 +191,7 @@ public class ExcelUtil<T>
             {
                 Field field = allFields[col];
                 Excel attr = field.getAnnotation(Excel.class);
-                if (attr != null && (attr.type() == Type.ALL || attr.type() == type))
+                if (this.isAttrType(attr))
                 {
                     // 设置类的私有字段属性可访问.
                     field.setAccessible(true);
@@ -322,7 +322,7 @@ public class ExcelUtil<T>
         try
         {
             // 取出一共有多少个sheet.
-            double sheetNo = Math.ceil(list.size() / sheetSize);
+            double sheetNo = Math.ceil(list.size() / SHEET_SIZE);
             for (int index = 0; index <= sheetNo; index++)
             {
                 createSheet(sheetNo, index);
@@ -386,8 +386,8 @@ public class ExcelUtil<T>
      */
     public void fillExcelData(int index, Row row)
     {
-        int startNo = index * sheetSize;
-        int endNo = Math.min(startNo + sheetSize, list.size());
+        int startNo = index * SHEET_SIZE;
+        int endNo = Math.min(startNo + SHEET_SIZE, list.size());
         for (int i = startNo; i < endNo; i++)
         {
             row = sheet.createRow(i + 1 - startNo);
@@ -782,10 +782,14 @@ public class ExcelUtil<T>
      */
     private void putToField(Field field, Excel attr)
     {
-        if (attr != null && (attr.type() == Type.ALL || attr.type() == type))
+        if (this.isAttrType(attr))
         {
             this.fields.add(new Object[] { field, attr });
         }
+    }
+
+    private boolean isAttrType(Excel attr){
+        return attr != null && (attr.type() == Type.ALL || attr.type() == type);
     }
 
     /**
@@ -841,7 +845,8 @@ public class ExcelUtil<T>
                     val = cell.getNumericCellValue();
                     if (HSSFDateUtil.isCellDateFormatted(cell))
                     {
-                        val = DateUtil.getJavaDate((Double) val); // POI Excel 日期格式转换
+                        // POI Excel 日期格式转换
+                        val = DateUtil.getJavaDate((Double) val);
                     }
                     else
                     {

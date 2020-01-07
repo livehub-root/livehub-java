@@ -86,6 +86,7 @@ public class LhCHeightServiceImpl implements LhCHeightService {
         return lhcHeightMapper.deleteLhCHeightById(ts);
     }
 
+    @Override
     public void createTable() {
         lhcHeightMapper.createTable();
     }

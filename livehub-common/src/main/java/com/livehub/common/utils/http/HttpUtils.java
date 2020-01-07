@@ -162,6 +162,7 @@ public class HttpUtils
         return result.toString();
     }
 
+    @SuppressWarnings("AlibabaLowerCamelCaseVariableNaming")
     public static String sendSSLPost(String url, String param)
     {
         StringBuilder result = new StringBuilder();
@@ -189,7 +190,7 @@ public class HttpUtils
             String ret = "";
             while ((ret = br.readLine()) != null)
             {
-                if (ret != null && !ret.trim().equals(""))
+                if (ret != null && !"".equals(ret.trim()))
                 {
                     result.append(new String(ret.getBytes("ISO-8859-1"), "utf-8"));
                 }

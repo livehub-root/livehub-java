@@ -54,7 +54,7 @@ public class SwaggerConfig
                 .description("Livehub is an open source hub to allow IoT devices")
                 .termsOfServiceUrl("https://github.com/livehub-root/livehub")
                 // 作者信息
-                .contact("lmaster")
+                .contact(new Contact("lmaster","","407987823@qq.com"))
                 // 版本
                 .version("版本号:" + Global.getVersion())
                 .build();

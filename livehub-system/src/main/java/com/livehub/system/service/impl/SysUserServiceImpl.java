@@ -72,6 +72,7 @@ public class SysUserServiceImpl implements ISysUserService
      * @param user 用户信息
      * @return 用户信息集合信息
      */
+    @Override
     @DataScope(deptAlias = "d", userAlias = "u")
     public List<SysUser> selectAllocatedList(SysUser user)
     {
@@ -84,6 +85,7 @@ public class SysUserServiceImpl implements ISysUserService
      * @param user 用户信息
      * @return 用户信息集合信息
      */
+    @Override
     @DataScope(deptAlias = "d", userAlias = "u")
     public List<SysUser> selectUnallocatedList(SysUser user)
     {
@@ -178,7 +180,7 @@ public class SysUserServiceImpl implements ISysUserService
      * @return 结果
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public int insertUser(SysUser user)
     {
         // 新增用户信息
@@ -197,7 +199,7 @@ public class SysUserServiceImpl implements ISysUserService
      * @return 结果
      */
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public int updateUser(SysUser user)
     {
         Long userId = user.getUserId();
@@ -346,6 +348,7 @@ public class SysUserServiceImpl implements ISysUserService
      * 
      * @param user 用户信息
      */
+    @Override
     public void checkUserAllowed(SysUser user)
     {
         if (StringUtils.isNotNull(user.getUserId()) && user.isAdmin())

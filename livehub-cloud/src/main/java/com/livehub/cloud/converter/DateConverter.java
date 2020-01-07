@@ -11,15 +11,15 @@ public class DateConverter implements Converter<String, Date> {
 
     private Logger logger = LoggerFactory.getLogger(DateConverter.class);
 
-    private static final String dateFormat = "yyyy-MM-dd HH:mm:ss";
-    private static final String shortDateFormat = "yyyy-MM-dd";
-    private static final String timeStampFormat = "^\\d+$";
+    private static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
+    private static final String SHORT_DATE_FORMAT = "yyyy-MM-dd";
+    private static final String TIME_STAMP_FORMAT = "^\\d+$";
 
     @Override
     public Date convert(String value) {
         logger.info("转换日期：" + value);
 
-        if (value == null || value.trim().equals("") || value.equalsIgnoreCase("null")) {
+        if (value == null || "".equals(value.trim()) || "null".equalsIgnoreCase(value)) {
             return null;
         }
 
@@ -29,12 +29,12 @@ public class DateConverter implements Converter<String, Date> {
             if (value.contains("-")) {
                 SimpleDateFormat formatter;
                 if (value.contains(":")) {
-                    formatter = new SimpleDateFormat(dateFormat);
+                    formatter = new SimpleDateFormat(DATE_FORMAT);
                 } else {
-                    formatter = new SimpleDateFormat(shortDateFormat);
+                    formatter = new SimpleDateFormat(SHORT_DATE_FORMAT);
                 }
                 return formatter.parse(value);
-            } else if (value.matches(timeStampFormat)) {
+            } else if (value.matches(TIME_STAMP_FORMAT)) {
                 Long lDate = new Long(value);
                 return new Date(lDate);
             }
