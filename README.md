@@ -22,7 +22,7 @@
 
 ## 在线体验
 - lmaster.top:8080
-- admin/admin123  
+- admin/admin123
 
 ## Run
 
@@ -35,7 +35,8 @@ nohup java -Dlogback.configurationFile=/home/java/logback.xml  -jar livehub-admi
 ## 更新
 
 2020-01-07
-- Alibaba Java Code Guidelines 代码规范化
+- [Alibaba Java Code Guidelines](https://github.com/alibaba/p3c) 代码规范化
+- [CVE-2018-18531](https://github.com/advisories/GHSA-8q89-pwhh-7wfq) 安全漏洞，库更新过
 
 
 
