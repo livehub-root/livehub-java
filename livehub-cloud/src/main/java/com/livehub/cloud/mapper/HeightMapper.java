@@ -1,8 +1,7 @@
 package com.livehub.cloud.mapper;
 
-import com.livehub.cloud.domain.LhCHeight;
+import com.livehub.cloud.domain.Height;
 
-import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
@@ -20,7 +19,7 @@ public interface LhCHeightMapper
      * @param ts 高度信息ID
      * @return 高度信息
      */
-    public LhCHeight selectLhCHeightById(Date ts);
+    public Height selectLhCHeightById(Date ts);
 
     /**
      * 查询高度信息列表
@@ -28,7 +27,7 @@ public interface LhCHeightMapper
      * @param lhcHeight 高度信息
      * @return 高度信息集合
      */
-    public List<LhCHeight> selectLhCHeightList(LhCHeight lhcHeight);
+    public List<Height> selectLhCHeightList(Height lhcHeight);
 
     /**
      * 新增高度信息
@@ -36,7 +35,7 @@ public interface LhCHeightMapper
      * @param lhcHeight 高度信息
      * @return 结果
      */
-    public int insertLhCHeight(LhCHeight lhcHeight);
+    public int insertLhCHeight(Height lhcHeight);
 
     /**
      * 修改高度信息
@@ -44,7 +43,7 @@ public interface LhCHeightMapper
      * @param lhcHeight 高度信息
      * @return 结果
      */
-    public int updateLhCHeight(LhCHeight lhcHeight);
+    public int updateLhCHeight(Height lhcHeight);
 
     /**
      * 删除高度信息

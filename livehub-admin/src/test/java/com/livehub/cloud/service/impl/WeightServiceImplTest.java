@@ -1,6 +1,6 @@
 package com.livehub.cloud.service.impl;
 
-import com.livehub.LiveHubCloudApplication;
+import com.livehub.LiveHubApplication;
 import com.livehub.cloud.domain.LhcWeight;
 import com.livehub.cloud.mapper.LhcWeightMapper;
 import com.livehub.cloud.service.ILhcWeightService;
@@ -13,10 +13,8 @@ import javax.annotation.Resource;
 import java.sql.Timestamp;
 import java.util.Date;
 
-import static org.junit.Assert.*;
-
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = {LiveHubCloudApplication.class})// 指定启动类
+@SpringBootTest(classes = {LiveHubApplication.class})// 指定启动类
 public class LhcWeightServiceImplTest {
 
     @Resource

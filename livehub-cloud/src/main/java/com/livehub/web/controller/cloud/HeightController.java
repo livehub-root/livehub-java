@@ -1,7 +1,7 @@
 package com.livehub.web.controller.cloud;
 
-import com.livehub.cloud.domain.LhCHeight;
-import com.livehub.cloud.service.LhCHeightService;
+import com.livehub.cloud.domain.Height;
+import com.livehub.cloud.service.HeightService;
 import com.livehub.common.core.controller.BaseController;
 import com.livehub.common.core.domain.AjaxResult;
 import io.swagger.annotations.Api;
@@ -19,38 +19,43 @@ import java.util.List;
  * @author lmaster
  * @date 2019-12-19
  */
-@Api(tags = "Height",description = "身高数据管理")
+@Api(tags = "Height", description = "身高数据管理")
 @RestController
 @RequestMapping("/api/cloud/height")
 public class LhCHeightController extends BaseController {
+    
+    private HeightService heightService;
+
     @Autowired
-    private LhCHeightService lhcHeightService;
+    public void setHeightService(HeightService heightService) {
+        this.heightService = heightService;
+    }
 
     @ApiOperation("获取身高数据列表")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "height", value = "身高数据", required = false, dataType = "short"),
-            @ApiImplicitParam(name = "oid", value = "牛编号", required = false, dataType = "string"),
-            @ApiImplicitParam(name = "did", value = "设备ID", required = false, dataType = "long"),
+        @ApiImplicitParam(name = "height", value = "身高数据", required = false, dataType = "short"),
+        @ApiImplicitParam(name = "oid", value = "牛编号", required = false, dataType = "string"),
+        @ApiImplicitParam(name = "did", value = "设备ID", required = false, dataType = "long"),
     })
     @GetMapping("")
-    public AjaxResult select(@RequestParam(value = "height", defaultValue = "0") Short height,
+    public AjaxResult select(@RequestParam(value = "height", defaultValue = "0") Short h,
                              @RequestParam(value = "oid", defaultValue = "") String oid,
                              @RequestParam(value = "did", defaultValue = "0") Long did) {
-        LhCHeight lhCHeight = new LhCHeight();
-        lhCHeight.setHeight(height);
-        lhCHeight.setOid(oid);
-        lhCHeight.setDid(did);
-        logger.debug(lhCHeight.toString());
-        List<LhCHeight> heightList = lhcHeightService.selectLhCHeightList(lhCHeight);
+        Height height = new Height();
+        height.setHeight(h);
+        height.setOid(oid);
+        height.setDid(did);
+        logger.debug(height.toString());
+        List<Height> heightList = heightService.select(height);
         return AjaxResult.success(heightList);
     }
 
     @ApiOperation("提交身高数据")
-    @ApiImplicitParam(name = "height", value = "身高数据", dataType = "LhCHeight")
+    @ApiImplicitParam(name = "height", value = "身高数据", dataType = "Height")
     @PostMapping("")
-    public AjaxResult insert(@RequestBody LhCHeight height) {
+    public AjaxResult insert(@RequestBody Height height) {
         logger.debug(height.toString());
-        int res = lhcHeightService.insertLhCHeight(height);
+        int res = heightService.insert(height);
         return AjaxResult.success(res);
     }
 }

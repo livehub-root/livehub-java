@@ -6,11 +6,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = {LiveHubCloudApplication.class})// 指定启动类
+@SpringBootTest(classes = {LiveHubApplication.class})// 指定启动类
 class LiveHubCloudApplicationTests {
 
     @Test
     void contextLoads() {
     }
-
 }

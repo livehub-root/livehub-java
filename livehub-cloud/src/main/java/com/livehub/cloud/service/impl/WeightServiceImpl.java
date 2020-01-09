@@ -9,7 +9,7 @@ import com.livehub.common.enums.DataSourceType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.livehub.cloud.mapper.LhcWeightMapper;
-import com.livehub.cloud.domain.LhcWeight;
+import com.livehub.cloud.domain.Weight;
 import com.livehub.cloud.service.ILhcWeightService;
 import com.livehub.common.core.text.Convert;
 
@@ -33,7 +33,7 @@ public class LhcWeightServiceImpl implements ILhcWeightService
      * @return 体重信息
      */
     @Override
-    public LhcWeight selectLhcWeightById(Timestamp ts)
+    public Weight selectLhcWeightById(Timestamp ts)
     {
         return lhcWeightMapper.selectLhcWeightById(ts);
     }
@@ -41,37 +41,37 @@ public class LhcWeightServiceImpl implements ILhcWeightService
     /**
      * 查询体重信息列表
      * 
-     * @param lhcWeight 体重信息
+     * @param weight 体重信息
      * @return 体重信息
      */
     @Override
-    public List<LhcWeight> selectLhcWeightList(LhcWeight lhcWeight)
+    public List<Weight> selectLhcWeightList(Weight weight)
     {
-        return lhcWeightMapper.selectLhcWeightList(lhcWeight);
+        return lhcWeightMapper.selectLhcWeightList(weight);
     }
 
     /**
      * 新增体重信息
      * 
-     * @param lhcWeight 体重信息
+     * @param weight 体重信息
      * @return 结果
      */
     @Override
-    public int insertLhcWeight(LhcWeight lhcWeight)
+    public int insertLhcWeight(Weight weight)
     {
-        return lhcWeightMapper.insertLhcWeight(lhcWeight);
+        return lhcWeightMapper.insertLhcWeight(weight);
     }
 
     /**
      * 修改体重信息
      * 
-     * @param lhcWeight 体重信息
+     * @param weight 体重信息
      * @return 结果
      */
     @Override
-    public int updateLhcWeight(LhcWeight lhcWeight)
+    public int updateLhcWeight(Weight weight)
     {
-        return lhcWeightMapper.updateLhcWeight(lhcWeight);
+        return lhcWeightMapper.updateLhcWeight(weight);
     }
 
     /**

@@ -1,6 +1,6 @@
 package com.livehub.cloud.service.impl;
 
-import com.livehub.cloud.domain.LhCHeight;
+import com.livehub.cloud.domain.Height;
 import com.livehub.cloud.mapper.LhCHeightMapper;
 import com.livehub.cloud.service.LhCHeightService;
 import com.livehub.common.annotation.DataSource;
@@ -27,7 +27,7 @@ public class LhCHeightServiceImpl implements LhCHeightService {
      * @return 高度信息
      */
     @Override
-    public LhCHeight selectLhCHeightById(Date ts) {
+    public Height selectLhCHeightById(Date ts) {
         return lhcHeightMapper.selectLhCHeightById(ts);
     }
 
@@ -38,7 +38,7 @@ public class LhCHeightServiceImpl implements LhCHeightService {
      * @return 高度信息
      */
     @Override
-    public List<LhCHeight> selectLhCHeightList(LhCHeight lhcHeight) {
+    public List<Height> selectLhCHeightList(Height lhcHeight) {
         return lhcHeightMapper.selectLhCHeightList(lhcHeight);
     }
 
@@ -49,7 +49,7 @@ public class LhCHeightServiceImpl implements LhCHeightService {
      * @return 结果
      */
     @Override
-    public int insertLhCHeight(LhCHeight lhcHeight) {
+    public int insertLhCHeight(Height lhcHeight) {
         return lhcHeightMapper.insertLhCHeight(lhcHeight);
     }
 
@@ -60,7 +60,7 @@ public class LhCHeightServiceImpl implements LhCHeightService {
      * @return 结果
      */
     @Override
-    public int updateLhCHeight(LhCHeight lhcHeight) {
+    public int updateLhCHeight(Height lhcHeight) {
         return lhcHeightMapper.updateLhCHeight(lhcHeight);
     }
 
