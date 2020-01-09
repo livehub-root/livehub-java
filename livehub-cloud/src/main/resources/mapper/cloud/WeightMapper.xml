@@ -10,14 +10,14 @@
         values (#{ts,jdbcType=TIMESTAMP}, #{oid,jdbcType=VARCHAR}, #{weight,jdbcType=INTEGER});
     </insert>
 
-    <sql id="selectLhcWeightVo">
+    <sql id="WeightVo">
         select ts, oid, weight, did from weight
     </sql>
 
-    <select id="selectLhcWeightList"
+    <select id="select"
             parameterType="com.livehub.cloud.mapper.WeightMapper"
             resultType="java.util.LinkedHashMap">
-        <include refid="selectLhcWeightVo"/>
+        <include refid="WeightVo"/>
     </select>
 
 </mapper>
