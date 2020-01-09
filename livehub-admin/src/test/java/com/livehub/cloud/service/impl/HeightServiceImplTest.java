@@ -1,27 +1,27 @@
 package com.livehub.cloud.service.impl;
 
-import com.livehub.cloud.domain.LhCHeight;
-import com.livehub.cloud.mapper.LhCHeightMapper;
-import com.livehub.cloud.service.LhCHeightService;
+import com.livehub.cloud.domain.Height;
+import com.livehub.cloud.mapper.HeightMapper;
+import com.livehub.cloud.service.HeightService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
-import java.sql.Timestamp;
+
 import com.livehub.LiveHubApplication;
 import java.util.Date;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {LiveHubApplication.class})// 指定启动类
-public class LhCHeightServiceImplTest {
+public class HeightServiceImplTest {
 
     @Resource
-    private LhCHeightService lhcHeightService;
+    private HeightService lhcHeightService;
 
     @Resource
-    private LhCHeightMapper lhcHeightMapper;
+    private HeightMapper lhcHeightMapper;
 
     @Test
     public void createDB() {
@@ -34,7 +34,7 @@ public class LhCHeightServiceImplTest {
 
     @Test
     public void insertLhCHeight() {
-        LhCHeight height = new LhCHeight();
+        Height height = new Height();
         height.setTs(new Date());
         height.setDid(2L);
         height.setOid("1200456");
@@ -44,7 +44,7 @@ public class LhCHeightServiceImplTest {
 
     @Test
     public void selectLhCHeightList() {
-        LhCHeight height = new LhCHeight();
+        Height height = new Height();
 //        height.setTs(new Timestamp(new Date().getTime()));
 //        height.setDid(2L);
 //        height.setOid("123456");

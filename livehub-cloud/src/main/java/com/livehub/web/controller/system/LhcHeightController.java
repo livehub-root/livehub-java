@@ -1,7 +1,7 @@
 package com.livehub.web.controller.system;
 
-import com.livehub.cloud.domain.LhCHeight;
-import com.livehub.cloud.service.LhCHeightService;
+import com.livehub.cloud.domain.Height;
+import com.livehub.cloud.service.HeightService;
 import com.livehub.common.annotation.Log;
 import com.livehub.common.core.controller.BaseController;
 import com.livehub.common.core.domain.AjaxResult;
@@ -31,7 +31,7 @@ public class LhcHeightController extends BaseController
     private String prefix = "cloud/height";
 
     @Autowired
-    private LhCHeightService lhcHeightService;
+    private HeightService lhcHeightService;
 
     @RequiresPermissions("cloud:height:view")
     @GetMapping()
@@ -46,10 +46,10 @@ public class LhcHeightController extends BaseController
     @RequiresPermissions("cloud:height:list")
     @PostMapping("/list")
     @ResponseBody
-    public TableDataInfo list(LhCHeight lhcHeight)
+    public TableDataInfo list(Height lhcHeight)
     {
         startPage();
-        List<LhCHeight> list = lhcHeightService.selectLhCHeightList(lhcHeight);
+        List<Height> list = lhcHeightService.selectLhCHeightList(lhcHeight);
         return getDataTable(list);
     }
 
@@ -60,10 +60,10 @@ public class LhcHeightController extends BaseController
     @Log(title = "高度信息", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     @ResponseBody
-    public AjaxResult export(LhCHeight lhcHeight)
+    public AjaxResult export(Height lhcHeight)
     {
-        List<LhCHeight> list = lhcHeightService.selectLhCHeightList(lhcHeight);
-        ExcelUtil<LhCHeight> util = new ExcelUtil<LhCHeight>(LhCHeight.class);
+        List<Height> list = lhcHeightService.selectLhCHeightList(lhcHeight);
+        ExcelUtil<Height> util = new ExcelUtil<Height>(Height.class);
         return util.exportExcel(list, "height");
     }
 
@@ -83,7 +83,7 @@ public class LhcHeightController extends BaseController
     @Log(title = "高度信息", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
-    public AjaxResult addSave(LhCHeight lhcHeight)
+    public AjaxResult addSave(Height lhcHeight)
     {
         return toAjax(lhcHeightService.insertLhCHeight(lhcHeight));
     }
@@ -94,7 +94,7 @@ public class LhcHeightController extends BaseController
     @GetMapping("/edit/{ts}")
     public String edit(@PathVariable("ts") Date ts, ModelMap mmap)
     {
-        LhCHeight lhcHeight = lhcHeightService.selectLhCHeightById(ts);
+        Height lhcHeight = lhcHeightService.selectLhCHeightById(ts);
         mmap.put("lhcHeight", lhcHeight);
         return prefix + "/edit";
     }
@@ -106,7 +106,7 @@ public class LhcHeightController extends BaseController
     @Log(title = "高度信息", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
-    public AjaxResult editSave(LhCHeight lhcHeight)
+    public AjaxResult editSave(Height lhcHeight)
     {
         return toAjax(lhcHeightService.updateLhCHeight(lhcHeight));
     }

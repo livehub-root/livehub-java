@@ -12,7 +12,7 @@ import java.util.List;
  * @author lmaster
  * @date 2019-12-23
  */
-public interface LhcWeightMapper 
+public interface WeightMapper
 {
     /**
      * 查询体重信息

@@ -1,43 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.livehub.cloud.mapper.HeightMapper">
 
-    <update id="createDB">
-        create database if not exists livehub2;
-    </update>
-
-    <update id="createTable">
-        create table if not exists
-            height (ts timestamp, oid binary(24), height smallint)
-            tags(did bigint);
-    </update>
-
-
-    <insert id="insertLhCHeight" parameterType="LhCHeight">
+    <insert id="insert"
+            parameterType="com.livehub.cloud.domain.Height">
         insert into height${did} using height tags (#{did,jdbcType=BIGINT})
                 values (#{ts,jdbcType=TIMESTAMP}, #{oid,jdbcType=VARCHAR}, #{height,jdbcType=SMALLINT});
     </insert>
 
-
-    <insert id="batchInsert" parameterType="java.util.List">
-        insert into test.student (ts, studentId, studentName) values
-        <foreach separator=" " collection="list" item="student" index="index">
-            (now + ${index}a, ${student.studentId}, ${student.studentName})
-        </foreach>
-    </insert>
-
-
-    <sql id="selectLhCHeightVo">
+    <sql id="HeightVo">
         select ts, oid, height,did from height
     </sql>
-    <select id="selectLhCHeightList" resultType="java.util.LinkedHashMap">
-        <include refid="selectLhCHeightVo"/>
+
+    <select id="select"
+            parameterType="com.livehub.cloud.domain.Height"
+            resultType="java.util.LinkedHashMap">
+        <include refid="HeightVo"/>
         <where>
-            <if test="oid != null and oid != ''"> and oid = #{oid}</if>
-            <if test="height != null and height != 0"> and height = #{height}</if>
-            <if test="did != null and did != 0"> and did = #{did}</if>
+            <if test="oid != null and oid != ''">and oid = #{oid}</if>
+            <if test="height != null and height != 0">and height = #{height}</if>
+            <if test="did != null and did != 0">and did = #{did}</if>
         </where>
     </select>
 

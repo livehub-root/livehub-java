@@ -22,8 +22,8 @@ import java.util.List;
 @Api(tags = "Height", description = "身高数据管理")
 @RestController
 @RequestMapping("/api/cloud/height")
-public class LhCHeightController extends BaseController {
-    
+public class HeightController extends BaseController {
+
     private HeightService heightService;
 
     @Autowired

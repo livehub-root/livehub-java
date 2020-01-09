@@ -1,9 +1,9 @@
 package com.livehub.cloud.service.impl;
 
 import com.livehub.LiveHubApplication;
-import com.livehub.cloud.domain.LhcWeight;
-import com.livehub.cloud.mapper.LhcWeightMapper;
-import com.livehub.cloud.service.ILhcWeightService;
+import com.livehub.cloud.domain.Weight;
+import com.livehub.cloud.mapper.WeightMapper;
+import com.livehub.cloud.service.WeightService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,13 +15,13 @@ import java.util.Date;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {LiveHubApplication.class})// 指定启动类
-public class LhcWeightServiceImplTest {
+public class WeightServiceImplTest {
 
     @Resource
-    private ILhcWeightService lhcWeightService;
+    private WeightService lhcWeightService;
 
     @Resource
-    private LhcWeightMapper lhcWeightMapper;
+    private WeightMapper weightMapper;
 
     @Test
     public void init() {
@@ -30,7 +30,7 @@ public class LhcWeightServiceImplTest {
 
     @Test
     public void selectLhcWeightList() {
-        LhcWeight weight = new LhcWeight();
+        Weight weight = new Weight();
         weight.setTs(new Timestamp(new Date().getTime()));
         weight.setDid(2L);
         weight.setOid("1200456");
@@ -42,7 +42,7 @@ public class LhcWeightServiceImplTest {
 
     @Test
     public void insertLhcWeight() {
-        LhcWeight weight = new LhcWeight();
+        Weight weight = new Weight();
         weight.setTs(new Timestamp(new Date().getTime()));
         weight.setDid(2L);
         weight.setOid("1200456");

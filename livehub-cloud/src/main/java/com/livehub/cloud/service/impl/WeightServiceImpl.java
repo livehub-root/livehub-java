@@ -8,9 +8,9 @@ import com.livehub.common.annotation.DataSource;
 import com.livehub.common.enums.DataSourceType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.livehub.cloud.mapper.LhcWeightMapper;
+import com.livehub.cloud.mapper.WeightMapper;
 import com.livehub.cloud.domain.Weight;
-import com.livehub.cloud.service.ILhcWeightService;
+import com.livehub.cloud.service.WeightService;
 import com.livehub.common.core.text.Convert;
 
 /**
@@ -21,10 +21,10 @@ import com.livehub.common.core.text.Convert;
  */
 @Service
 @DataSource(value = DataSourceType.TAOS)
-public class LhcWeightServiceImpl implements ILhcWeightService 
+public class WeightServiceImpl implements WeightService
 {
     @Autowired
-    private LhcWeightMapper lhcWeightMapper;
+    private WeightMapper weightMapper;
 
     /**
      * 查询体重信息
@@ -35,7 +35,7 @@ public class LhcWeightServiceImpl implements ILhcWeightService
     @Override
     public Weight selectLhcWeightById(Timestamp ts)
     {
-        return lhcWeightMapper.selectLhcWeightById(ts);
+        return weightMapper.selectLhcWeightById(ts);
     }
 
     /**
@@ -47,7 +47,7 @@ public class LhcWeightServiceImpl implements ILhcWeightService
     @Override
     public List<Weight> selectLhcWeightList(Weight weight)
     {
-        return lhcWeightMapper.selectLhcWeightList(weight);
+        return weightMapper.selectLhcWeightList(weight);
     }
 
     /**
@@ -59,7 +59,7 @@ public class LhcWeightServiceImpl implements ILhcWeightService
     @Override
     public int insertLhcWeight(Weight weight)
     {
-        return lhcWeightMapper.insertLhcWeight(weight);
+        return weightMapper.insertLhcWeight(weight);
     }
 
     /**
@@ -71,7 +71,7 @@ public class LhcWeightServiceImpl implements ILhcWeightService
     @Override
     public int updateLhcWeight(Weight weight)
     {
-        return lhcWeightMapper.updateLhcWeight(weight);
+        return weightMapper.updateLhcWeight(weight);
     }
 
     /**
@@ -83,7 +83,7 @@ public class LhcWeightServiceImpl implements ILhcWeightService
     @Override
     public int deleteLhcWeightByIds(String ids)
     {
-        return lhcWeightMapper.deleteLhcWeightByIds(Convert.toStrArray(ids));
+        return weightMapper.deleteLhcWeightByIds(Convert.toStrArray(ids));
     }
 
     /**
@@ -95,9 +95,9 @@ public class LhcWeightServiceImpl implements ILhcWeightService
     @Override
     public int deleteLhcWeightById(Timestamp ts)
     {
-        return lhcWeightMapper.deleteLhcWeightById(ts);
+        return weightMapper.deleteLhcWeightById(ts);
     }
 
     @Override
-    public void createWeightTable(){ lhcWeightMapper.createWeightTable();}
+    public void createWeightTable(){ weightMapper.createWeightTable();}
 }

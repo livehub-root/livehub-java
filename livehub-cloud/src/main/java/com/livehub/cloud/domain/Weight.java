@@ -1,78 +1,34 @@
 package com.livehub.cloud.domain;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import java.sql.Timestamp;
-
+import java.util.Date;
 
 /**
- * 体重信息对象 lhc_weight
- * 
+ * 体重信息对象
+ *
  * @author lmaster
  * @date 2019-12-23
  */
-public class LhcWeight
-{
+@Data
+@ApiModel(value = "Weight", description = "体重数据实体")
+public class Weight {
 
+    @ApiModelProperty(name = "ts", value = "时间戳", example = "2016-01-01 01:00:00", dataType = "date")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date ts;
 
-    /** 时间 */
-    private Timestamp ts;
-
-    /** 对象编号 */
+    @ApiModelProperty("牛编号")
     private String oid;
 
-    /** 体重 */
-
+    @ApiModelProperty("体重数据")
     private Integer weight;
 
-    /** 设备编号 */
+    @ApiModelProperty("设备ID")
     private Long did;
-
-    public void setTs(Timestamp ts)
-    {
-        this.ts = ts;
-    }
-
-    public Timestamp getTs()
-    {
-        return ts;
-    }
-    public void setOid(String oid) 
-    {
-        this.oid = oid;
-    }
-
-    public String getOid() 
-    {
-        return oid;
-    }
-    public void setWeight(Integer weight)
-    {
-        this.weight = weight;
-    }
-
-    public Integer getWeight()
-    {
-        return weight;
-    }
-    public void setDid(Long did) 
-    {
-        this.did = did;
-    }
-
-    public Long getDid() 
-    {
-        return did;
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("ts", getTs())
-            .append("oid", getOid())
-            .append("weight", getWeight())
-            .append("did", getDid())
-            .toString();
-    }
 }

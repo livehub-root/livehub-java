@@ -8,9 +8,12 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
+/**
+ * @author Lmaster
+ */
 @Data
-@ApiModel(value="LhCHeight", description="身高数据实体")
-public class LhCHeight {
+@ApiModel(value="Height", description="身高数据实体")
+public class Height {
 
     @ApiModelProperty(name = "ts", value = "时间戳", example = "2016-01-01 01:00:00",dataType = "date")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")

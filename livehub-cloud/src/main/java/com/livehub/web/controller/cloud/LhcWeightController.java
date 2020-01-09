@@ -1,7 +1,7 @@
 package com.livehub.web.controller.cloud;
 
-import com.livehub.cloud.domain.LhcWeight;
-import com.livehub.cloud.service.ILhcWeightService;
+import com.livehub.cloud.domain.Weight;
+import com.livehub.cloud.service.WeightService;
 import com.livehub.common.annotation.Log;
 import com.livehub.common.core.controller.BaseController;
 import com.livehub.common.core.domain.AjaxResult;
@@ -30,7 +30,7 @@ public class LhcWeightController extends BaseController
     private String prefix = "cloud/weight";
 
     @Autowired
-    private ILhcWeightService lhcWeightService;
+    private WeightService lhcWeightService;
 
     @RequiresPermissions("cloud:weight:view")
     @GetMapping()
@@ -45,10 +45,10 @@ public class LhcWeightController extends BaseController
     @RequiresPermissions("cloud:weight:list")
     @PostMapping("/list")
     @ResponseBody
-    public TableDataInfo list(LhcWeight lhcWeight)
+    public TableDataInfo list(Weight weight)
     {
         startPage();
-        List<LhcWeight> list = lhcWeightService.selectLhcWeightList(lhcWeight);
+        List<Weight> list = lhcWeightService.selectLhcWeightList(weight);
         return getDataTable(list);
     }
 
@@ -58,10 +58,10 @@ public class LhcWeightController extends BaseController
     @RequiresPermissions("cloud:weight:export")
     @PostMapping("/export")
     @ResponseBody
-    public AjaxResult export(LhcWeight lhcWeight)
+    public AjaxResult export(Weight weight)
     {
-        List<LhcWeight> list = lhcWeightService.selectLhcWeightList(lhcWeight);
-        ExcelUtil<LhcWeight> util = new ExcelUtil<LhcWeight>(LhcWeight.class);
+        List<Weight> list = lhcWeightService.selectLhcWeightList(weight);
+        ExcelUtil<Weight> util = new ExcelUtil<Weight>(Weight.class);
         return util.exportExcel(list, "weight");
     }
 
@@ -81,9 +81,9 @@ public class LhcWeightController extends BaseController
     @Log(title = "体重信息", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
-    public AjaxResult addSave(LhcWeight lhcWeight)
+    public AjaxResult addSave(Weight weight)
     {
-        return toAjax(lhcWeightService.insertLhcWeight(lhcWeight));
+        return toAjax(lhcWeightService.insertLhcWeight(weight));
     }
 
     /**
@@ -92,8 +92,8 @@ public class LhcWeightController extends BaseController
     @GetMapping("/edit/{ts}")
     public String edit(@PathVariable("ts") Timestamp ts, ModelMap mmap)
     {
-        LhcWeight lhcWeight = lhcWeightService.selectLhcWeightById(ts);
-        mmap.put("lhcWeight", lhcWeight);
+        Weight weight = lhcWeightService.selectLhcWeightById(ts);
+        mmap.put("weight", weight);
         return prefix + "/edit";
     }
 
@@ -104,9 +104,9 @@ public class LhcWeightController extends BaseController
     @Log(title = "体重信息", businessType = BusinessType.UPDATE)
     @PostMapping("/edit")
     @ResponseBody
-    public AjaxResult editSave(LhcWeight lhcWeight)
+    public AjaxResult editSave(Weight weight)
     {
-        return toAjax(lhcWeightService.updateLhcWeight(lhcWeight));
+        return toAjax(lhcWeightService.updateLhcWeight(weight));
     }
 
     /**
