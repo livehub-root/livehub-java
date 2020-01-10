@@ -19,23 +19,25 @@ import java.util.List;
 
 /**
  * 体重信息Controller
- * 
+ *
  * @author lmaster
  * @date 2019-12-23
  */
 @Controller
 @RequestMapping("/cloud/weight")
-public class LhcWeightController extends BaseController
-{
+public class WeightController extends BaseController {
     private String prefix = "cloud/weight";
 
+    private WeightService weightService;
+
     @Autowired
-    private WeightService lhcWeightService;
+    public void setWeightService(WeightService weightService) {
+        this.weightService = weightService;
+    }
 
     @RequiresPermissions("cloud:weight:view")
     @GetMapping()
-    public String weight()
-    {
+    public String weight() {
         return prefix + "/weight";
     }
 
@@ -45,10 +47,9 @@ public class LhcWeightController extends BaseController
     @RequiresPermissions("cloud:weight:list")
     @PostMapping("/list")
     @ResponseBody
-    public TableDataInfo list(Weight weight)
-    {
+    public TableDataInfo list(Weight weight) {
         startPage();
-        List<Weight> list = lhcWeightService.selectLhcWeightList(weight);
+        List<Weight> list = weightService.select(weight);
         return getDataTable(list);
     }
 
@@ -58,9 +59,8 @@ public class LhcWeightController extends BaseController
     @RequiresPermissions("cloud:weight:export")
     @PostMapping("/export")
     @ResponseBody
-    public AjaxResult export(Weight weight)
-    {
-        List<Weight> list = lhcWeightService.selectLhcWeightList(weight);
+    public AjaxResult export(Weight weight) {
+        List<Weight> list = weightService.select(weight);
         ExcelUtil<Weight> util = new ExcelUtil<Weight>(Weight.class);
         return util.exportExcel(list, "weight");
     }
@@ -69,8 +69,7 @@ public class LhcWeightController extends BaseController
      * 新增体重信息
      */
     @GetMapping("/add")
-    public String add()
-    {
+    public String add() {
         return prefix + "/add";
     }
 
@@ -81,43 +80,8 @@ public class LhcWeightController extends BaseController
     @Log(title = "体重信息", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
-    public AjaxResult addSave(Weight weight)
-    {
-        return toAjax(lhcWeightService.insertLhcWeight(weight));
+    public AjaxResult addSave(Weight weight) {
+        return toAjax(weightService.insert(weight));
     }
 
-    /**
-     * 修改体重信息
-     */
-    @GetMapping("/edit/{ts}")
-    public String edit(@PathVariable("ts") Timestamp ts, ModelMap mmap)
-    {
-        Weight weight = lhcWeightService.selectLhcWeightById(ts);
-        mmap.put("weight", weight);
-        return prefix + "/edit";
-    }
-
-    /**
-     * 修改保存体重信息
-     */
-    @RequiresPermissions("cloud:weight:edit")
-    @Log(title = "体重信息", businessType = BusinessType.UPDATE)
-    @PostMapping("/edit")
-    @ResponseBody
-    public AjaxResult editSave(Weight weight)
-    {
-        return toAjax(lhcWeightService.updateLhcWeight(weight));
-    }
-
-    /**
-     * 删除体重信息
-     */
-    @RequiresPermissions("cloud:weight:remove")
-    @Log(title = "体重信息", businessType = BusinessType.DELETE)
-    @PostMapping( "/remove")
-    @ResponseBody
-    public AjaxResult remove(String ids)
-    {
-        return toAjax(lhcWeightService.deleteLhcWeightByIds(ids));
-    }
 }

@@ -6,12 +6,12 @@
 
     <insert id="insert"
             parameterType="com.livehub.cloud.mapper.WeightMapper">
-        insert into weight${did} using weight tags (#{did,jdbcType=BIGINT})
+        insert into weight${did} using weight tags (#{did,jdbcType=BIGINT}, #{tid,jdbcType=BIGINT})
         values (#{ts,jdbcType=TIMESTAMP}, #{oid,jdbcType=VARCHAR}, #{weight,jdbcType=INTEGER});
     </insert>
 
     <sql id="WeightVo">
-        select ts, oid, weight, did from weight
+        select ts, oid, weight, tid, did from weight
     </sql>
 
     <select id="select"

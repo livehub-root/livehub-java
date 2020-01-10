@@ -1,64 +1,111 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.livehub.system.mapper.LhEquipmentMapper">
-    
+
     <resultMap type="LhEquipment" id="LhEquipmentResult">
-        <result property="equipmentId"    column="equipment_id"    />
-        <result property="equipmentNo"    column="equipment_no"    />
-        <result property="location"    column="location"    />
-        <result property="createBy"    column="create_by"    />
-        <result property="createTime"    column="create_time"    />
-        <result property="updateBy"    column="update_by"    />
-        <result property="updateTime"    column="update_time"    />
-        <result property="remark"    column="remark"    />
+        <result property="equipmentId" column="equipment_id"/>
+        <result property="equipmentNo" column="equipment_no"/>
+        <result property="registrationCode" column="registration_ode"/>
+        <result property="token" column="token"/>
+        <result property="location" column="location"/>
+        <result property="deviceName" column="device_name"/>
+        <result property="deviceType" column="device_type"/>
+        <result property="venderId" column="vender_id"/>
+        <result property="venderName" column="vender_name"/>
+        <result property="modelNumber" column="model_number"/>
+        <result property="firmwareVersion" column="firmware_version"/>
+        <result property="firmwareDate" column="firmware_date"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="remark" column="remark"/>
     </resultMap>
 
     <sql id="selectLhEquipmentVo">
-        select equipment_id, equipment_no, location, create_by, create_time, update_by, update_time, remark from lh_equipment
+        select equipment_id, equipment_no, registration_ode, token, location, device_name, device_type, vender_id, vender_name, model_number, firmware_version, firmware_date, create_by, create_time, update_by, update_time, remark from lh_equipment
     </sql>
 
     <select id="selectLhEquipmentList" parameterType="LhEquipment" resultMap="LhEquipmentResult">
         <include refid="selectLhEquipmentVo"/>
-        <where>  
-            <if test="equipmentNo != null  and equipmentNo != ''"> and equipment_no = #{equipmentNo}</if>
-            <if test="location != null  and location != ''"> and location = #{location}</if>
+        <where>
+            <if test="equipmentNo != null  and equipmentNo != ''">and equipment_no = #{equipmentNo}</if>
+            <if test="registrationCode != null  and registrationCode != ''">and registration_ode = #{registrationCode}</if>
+            <if test="token != null  and token != ''">and token = #{token}</if>
+            <if test="location != null  and location != ''">and location = #{location}</if>
+            <if test="deviceName != null  and deviceName != ''">and device_name like concat('%', #{deviceName}, '%')
+            </if>
+            <if test="deviceType != null  and deviceType != ''">and device_type = #{deviceType}</if>
+            <if test="venderId != null  and venderId != ''">and vender_id = #{venderId}</if>
+            <if test="venderName != null  and venderName != ''">and vender_name like concat('%', #{venderName}, '%')
+            </if>
+            <if test="modelNumber != null  and modelNumber != ''">and model_number = #{modelNumber}</if>
+            <if test="firmwareVersion != null  and firmwareVersion != ''">and firmware_version = #{firmwareVersion}</if>
+            <if test="firmwareDate != null ">and firmware_date = #{firmwareDate}</if>
         </where>
     </select>
-    
+
     <select id="selectLhEquipmentById" parameterType="Long" resultMap="LhEquipmentResult">
         <include refid="selectLhEquipmentVo"/>
         where equipment_id = #{equipmentId}
     </select>
-        
+
     <insert id="insertLhEquipment" parameterType="LhEquipment" useGeneratedKeys="true" keyProperty="equipmentId">
         insert into lh_equipment
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="equipmentNo != null  and equipmentNo != ''">equipment_no,</if>
+            <if test="registrationCode != null  and registrationCode != ''">registration_ode,</if>
+            <if test="token != null  and token != ''">token,</if>
             <if test="location != null  and location != ''">location,</if>
+            <if test="deviceName != null  and deviceName != ''">device_name,</if>
+            <if test="deviceType != null  and deviceType != ''">device_type,</if>
+            <if test="venderId != null  and venderId != ''">vender_id,</if>
+            <if test="venderName != null  and venderName != ''">vender_name,</if>
+            <if test="modelNumber != null  and modelNumber != ''">model_number,</if>
+            <if test="firmwareVersion != null  and firmwareVersion != ''">firmware_version,</if>
+            <if test="firmwareDate != null ">firmware_date,</if>
             <if test="createBy != null  and createBy != ''">create_by,</if>
             <if test="createTime != null ">create_time,</if>
             <if test="updateBy != null  and updateBy != ''">update_by,</if>
             <if test="updateTime != null ">update_time,</if>
             <if test="remark != null  and remark != ''">remark,</if>
-         </trim>
+        </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="equipmentNo != null  and equipmentNo != ''">#{equipmentNo},</if>
+            <if test="registrationCode != null  and registrationCode != ''">#{registrationCode},</if>
+            <if test="token != null  and token != ''">#{token},</if>
             <if test="location != null  and location != ''">#{location},</if>
+            <if test="deviceName != null  and deviceName != ''">#{deviceName},</if>
+            <if test="deviceType != null  and deviceType != ''">#{deviceType},</if>
+            <if test="venderId != null  and venderId != ''">#{venderId},</if>
+            <if test="venderName != null  and venderName != ''">#{venderName},</if>
+            <if test="modelNumber != null  and modelNumber != ''">#{modelNumber},</if>
+            <if test="firmwareVersion != null  and firmwareVersion != ''">#{firmwareVersion},</if>
+            <if test="firmwareDate != null ">#{firmwareDate},</if>
             <if test="createBy != null  and createBy != ''">#{createBy},</if>
             <if test="createTime != null ">#{createTime},</if>
             <if test="updateBy != null  and updateBy != ''">#{updateBy},</if>
             <if test="updateTime != null ">#{updateTime},</if>
             <if test="remark != null  and remark != ''">#{remark},</if>
-         </trim>
+        </trim>
     </insert>
 
     <update id="updateLhEquipment" parameterType="LhEquipment">
         update lh_equipment
         <trim prefix="SET" suffixOverrides=",">
             <if test="equipmentNo != null  and equipmentNo != ''">equipment_no = #{equipmentNo},</if>
+            <if test="registrationCode != null  and registrationCode != ''">registration_ode = #{registrationCode},</if>
+            <if test="token != null  and token != ''">token = #{token},</if>
             <if test="location != null  and location != ''">location = #{location},</if>
+            <if test="deviceName != null  and deviceName != ''">device_name = #{deviceName},</if>
+            <if test="deviceType != null  and deviceType != ''">device_type = #{deviceType},</if>
+            <if test="venderId != null  and venderId != ''">vender_id = #{venderId},</if>
+            <if test="venderName != null  and venderName != ''">vender_name = #{venderName},</if>
+            <if test="modelNumber != null  and modelNumber != ''">model_number = #{modelNumber},</if>
+            <if test="firmwareVersion != null  and firmwareVersion != ''">firmware_version = #{firmwareVersion},</if>
+            <if test="firmwareDate != null ">firmware_date = #{firmwareDate},</if>
             <if test="createBy != null  and createBy != ''">create_by = #{createBy},</if>
             <if test="createTime != null ">create_time = #{createTime},</if>
             <if test="updateBy != null  and updateBy != ''">update_by = #{updateBy},</if>
@@ -73,10 +120,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <delete id="deleteLhEquipmentByIds" parameterType="String">
-        delete from lh_equipment where equipment_id in 
+        delete from lh_equipment where equipment_id in
         <foreach item="equipmentId" collection="array" open="(" separator="," close=")">
             #{equipmentId}
         </foreach>
     </delete>
-    
+
 </mapper>

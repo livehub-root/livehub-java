@@ -7,6 +7,9 @@ import org.springframework.core.convert.converter.Converter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * @author Lmaster
+ */
 public class DateConverter implements Converter<String, Date> {
 
     private Logger logger = LoggerFactory.getLogger(DateConverter.class);

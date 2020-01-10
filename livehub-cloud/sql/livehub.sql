@@ -15,7 +15,7 @@ DROP TABLE IF EXISTS lh_equipment;
 CREATE TABLE `lh_equipment` (
   `equipment_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '设备ID',
   `equipment_no` varchar(100) DEFAULT '' COMMENT '设备编号',
-  `registration_ode` varchar(100) DEFAULT '' COMMENT '注册码',
+  `registration_code` varchar(100) DEFAULT '' COMMENT '注册码',
   `token` varchar(100) DEFAULT '' COMMENT 'token',
   `location` varchar(100) DEFAULT '' COMMENT '地理位置',
   `device_name` varchar(100) DEFAULT '' COMMENT '设备名称',
@@ -40,6 +40,7 @@ CREATE TABLE `lhc_height` (
   `oid` varchar(24) DEFAULT '' COMMENT '对象编号',
   `height` smallint DEFAULT 0 COMMENT '高度',
   `did` bigint DEFAULT 0 COMMENT '设备编号',
+  `tid` bigint DEFAULT 0 COMMENT '任务编号',
   PRIMARY KEY (`ts`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='高度信息表';
 
@@ -49,5 +50,6 @@ CREATE TABLE `lhc_weight` (
   `oid` varchar(24) DEFAULT '' COMMENT '对象编号',
   `weight` int DEFAULT 0 COMMENT '体重',
   `did` bigint DEFAULT 0 COMMENT '设备编号',
+  `tid` bigint DEFAULT 0 COMMENT '任务编号',
   PRIMARY KEY (`ts`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='体重信息表';

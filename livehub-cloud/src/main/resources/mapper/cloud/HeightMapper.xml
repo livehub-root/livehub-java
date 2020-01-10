@@ -6,12 +6,12 @@
 
     <insert id="insert"
             parameterType="com.livehub.cloud.domain.Height">
-        insert into height${did} using height tags (#{did,jdbcType=BIGINT})
+        insert into height${did} using height tags (#{did,jdbcType=BIGINT}, #{tid,jdbcType=BIGINT})
                 values (#{ts,jdbcType=TIMESTAMP}, #{oid,jdbcType=VARCHAR}, #{height,jdbcType=SMALLINT});
     </insert>
 
     <sql id="HeightVo">
-        select ts, oid, height,did from height
+        select ts, oid, height, tid, did from height
     </sql>
 
     <select id="select"
@@ -21,6 +21,7 @@
         <where>
             <if test="oid != null and oid != ''">and oid = #{oid}</if>
             <if test="height != null and height != 0">and height = #{height}</if>
+            <if test="tid != null and tid != 0">and tid = #{tid}</if>
             <if test="did != null and did != 0">and did = #{did}</if>
         </where>
     </select>

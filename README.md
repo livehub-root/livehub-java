@@ -33,6 +33,9 @@ java -Dlogback.configurationFile=/home/java/logback.xml  -jar livehub-admin.jar
 nohup java -Dlogback.configurationFile=/home/java/logback.xml  -jar livehub-admin.jar >/dev/null &
 ```
 ## 更新
+2020-01-10
+- 更新 Cloud 下 Height 、Weight
+- 数据库 equipment 表更新，前台页面更新
 
 2020-01-09
 - 重写 Cloud 下的实例，采用 lombok 技术

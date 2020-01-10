@@ -11,32 +11,32 @@ import com.livehub.common.utils.poi.ExcelUtil;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
 import java.util.List;
 
 
 /**
  * 高度信息Controller
- * 
+ *
  * @author lmaster
  * @date 2019-12-19
  */
 @Controller
 @RequestMapping("/cloud/height")
-public class LhcHeightController extends BaseController
-{
+public class LhcHeightController extends BaseController {
     private String prefix = "cloud/height";
 
+    private HeightService heightService;
+
     @Autowired
-    private HeightService lhcHeightService;
+    public void setHeightService(HeightService heightService) {
+        this.heightService = heightService;
+    }
 
     @RequiresPermissions("cloud:height:view")
     @GetMapping()
-    public String height()
-    {
+    public String height() {
         return prefix + "/height";
     }
 
@@ -46,10 +46,9 @@ public class LhcHeightController extends BaseController
     @RequiresPermissions("cloud:height:list")
     @PostMapping("/list")
     @ResponseBody
-    public TableDataInfo list(Height lhcHeight)
-    {
+    public TableDataInfo list(Height height) {
         startPage();
-        List<Height> list = lhcHeightService.selectLhCHeightList(lhcHeight);
+        List<Height> list = heightService.select(height);
         return getDataTable(list);
     }
 
@@ -60,9 +59,8 @@ public class LhcHeightController extends BaseController
     @Log(title = "高度信息", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     @ResponseBody
-    public AjaxResult export(Height lhcHeight)
-    {
-        List<Height> list = lhcHeightService.selectLhCHeightList(lhcHeight);
+    public AjaxResult export(Height height) {
+        List<Height> list = heightService.select(height);
         ExcelUtil<Height> util = new ExcelUtil<Height>(Height.class);
         return util.exportExcel(list, "height");
     }
@@ -71,8 +69,7 @@ public class LhcHeightController extends BaseController
      * 新增高度信息
      */
     @GetMapping("/add")
-    public String add()
-    {
+    public String add() {
         return prefix + "/add";
     }
 
@@ -83,43 +80,8 @@ public class LhcHeightController extends BaseController
     @Log(title = "高度信息", businessType = BusinessType.INSERT)
     @PostMapping("/add")
     @ResponseBody
-    public AjaxResult addSave(Height lhcHeight)
-    {
-        return toAjax(lhcHeightService.insertLhCHeight(lhcHeight));
+    public AjaxResult addSave(Height height) {
+        return toAjax(heightService.insert(height));
     }
 
-    /**
-     * 修改高度信息
-     */
-    @GetMapping("/edit/{ts}")
-    public String edit(@PathVariable("ts") Date ts, ModelMap mmap)
-    {
-        Height lhcHeight = lhcHeightService.selectLhCHeightById(ts);
-        mmap.put("lhcHeight", lhcHeight);
-        return prefix + "/edit";
-    }
-
-    /**
-     * 修改保存高度信息
-     */
-    @RequiresPermissions("cloud:height:edit")
-    @Log(title = "高度信息", businessType = BusinessType.UPDATE)
-    @PostMapping("/edit")
-    @ResponseBody
-    public AjaxResult editSave(Height lhcHeight)
-    {
-        return toAjax(lhcHeightService.updateLhCHeight(lhcHeight));
-    }
-
-    /**
-     * 删除高度信息
-     */
-    @RequiresPermissions("cloud:height:remove")
-    @Log(title = "高度信息", businessType = BusinessType.DELETE)
-    @PostMapping( "/remove")
-    @ResponseBody
-    public AjaxResult remove(String ids)
-    {
-        return toAjax(lhcHeightService.deleteLhCHeightByIds(ids));
-    }
 }
