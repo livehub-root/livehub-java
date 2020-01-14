@@ -33,6 +33,10 @@ java -Dlogback.configurationFile=/home/java/logback.xml  -jar livehub-admin.jar
 nohup java -Dlogback.configurationFile=/home/java/logback.xml  -jar livehub-admin.jar >/dev/null &
 ```
 ## 更新
+2020-01-14
+- 添加 jwt ，为设备登录提供支持
+- 设备登录接口
+
 2020-01-10
 - 更新 Cloud 下 Height 、Weight
 - 数据库 equipment 表更新，前台页面更新

@@ -96,7 +96,7 @@
         update lh_equipment
         <trim prefix="SET" suffixOverrides=",">
             <if test="equipmentNo != null  and equipmentNo != ''">equipment_no = #{equipmentNo},</if>
-            <if test="registrationCode != null  and registrationCode != ''">registration_ode = #{registrationCode},</if>
+            <if test="registrationCode != null  and registrationCode != ''">registration_code = #{registrationCode},</if>
             <if test="token != null  and token != ''">token = #{token},</if>
             <if test="location != null  and location != ''">location = #{location},</if>
             <if test="deviceName != null  and deviceName != ''">device_name = #{deviceName},</if>
@@ -125,5 +125,10 @@
             #{equipmentId}
         </foreach>
     </delete>
+
+    <select id="login" parameterType="LhEquipment">
+        <include refid="selectLhEquipmentVo"/>
+        where equipment_no = #{equipmentNo} and registration_code = #{registrationCode}
+    </select>
 
 </mapper>
